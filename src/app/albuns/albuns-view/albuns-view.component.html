@@ -1,0 +1,13 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-10 alert alert-dark" role="alert" *ngIf="albumSemFotos">
+            Álbum de fotos sem imagens
+        </div>        
+        <div class="mb-5" *ngIf="!albumSemFotos">
+            <h3>Visualizando álbum de fotos: {{ album.nome }}</h3>
+        </div>        
+        <div class="col-lg-12 h-100 d-flex justify-content-center align-items-center">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+        </div>
+    </div>
+</div>

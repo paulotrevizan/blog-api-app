@@ -1,0 +1,31 @@
+<h2 class="mt-4">Criar novo album</h2>
+<br>
+<div class="container">
+    <form #postForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" [(ngModel)]="album.nome" name="titulo" 
+                    required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+              <button type="submit" class="btn btn-success">Criar</button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Álbum de fotos criado com sucesso.
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let error of errors">
+                    {{ error.field + ' ' + error.defaultMessage }}
+                </div>                
+            </div>
+        </div>        
+    </form>
+</div>

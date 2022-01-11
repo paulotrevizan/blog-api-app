@@ -1,0 +1,75 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-10">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="mb-4">
+                    <!-- Post title-->
+                    <h1 class="fw-bolder mb-1">{{ post.titulo }}</h1>
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2">Postado em: {{ post.data }} por {{ post.usuario.nome }}</div>
+                </header>
+                <!-- Preview image figure-->
+                <figure class="mb-4"><img class="img-fluid rounded" src="data:image/png;base64,{{ post.imagemCapa }}" alt="..." /></figure>
+                <!-- Post content-->
+                <section class="mb-5">
+                    <div [innerHTML]="post.conteudo"></div>
+                </section>
+            </article>
+            <!-- Comments section-->
+            <section class="mb-5"> 
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <!-- Comment form-->
+                        <div class="alert alert-info" role="alert" *ngIf="!logado">
+                            Faça login para deixar seu comentário
+                        </div>
+                        <form class="mb-4" *ngIf="logado">
+                            <input type="text" name="nome" [(ngModel)]="conteudoComentario"
+                                        class="form-control py-4"
+                                        placeholder="Participe da discussão e deixe um comentário :)"
+                                        autocomplete="off">
+                            <a class="btn btn-primary mt-1"                                
+                               (click)="salvarComentario()">Enviar</a>
+                        </form>
+                        <div class="alert alert-danger" *ngIf="mensagemErro">
+                            {{ mensagemErro }}
+                        </div>                        
+                        <!-- Single comment-->
+                        <div class="card d-flex mb-4" *ngFor="let comentario of post.comentarios">
+                            <div class="card-body ms-3">
+                                <div class="card-title font-weight-bold"> {{ comentario.usuario.nome }} disse: </div>
+                                <div class="card-subtitle mb-2 text-muted">{{ comentario.data }}</div> 
+                                <div class="card-text">{{ comentario.conteudo }}</div> 
+                                <button type="button" class="btn btn-link"
+                                        *ngIf="comentario.usuario.id == this.usuarioId"
+                                        (click)="preparaDeleteComentario(comentario)"
+                                        data-toggle="modal" data-target="#modalDelecao">Excluir</button>
+                                <div class="alert alert-danger" *ngIf="mensagemErroComentario">
+                                    {{ mensagemErroComentario }}
+                                </div>                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div id="modalDelecao" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirmação</h4>
+                </div>
+                <div class="modal-body" *ngIf="comentarioSelecionado">
+                    Deseja realmente excluir o comentário?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" (click)="deletarComentario()" data-dismiss="modal">Sim</button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

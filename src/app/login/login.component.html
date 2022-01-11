@@ -1,0 +1,77 @@
+<div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header">
+                                <h3 class="text-center font-weight-light my-4">
+                                    {{ cadastroUsuario ? 'Faça seu cadastro' : 'Entrar' }}
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-success" *ngIf="mensagemSucesso">
+                                    {{ mensagemSucesso }}
+                                </div>
+
+                                <div class="alert alert-danger" *ngIf="error">
+                                    {{ error }}
+                                </div>
+
+                                <form #loginForm="ngForm" (submit)="onSubmit()">
+                                    <div class="form-group" *ngIf="cadastroUsuario">
+                                        <label class="small mb-1">Seu nome</label>
+                                        <input type="text" name="nome" [(ngModel)]="nome"
+                                        class="form-control py-4"
+                                        placeholder="Digite seu nome">
+                                    </div>                                    
+                                    <div class="form-group">
+                                        <label class="small mb-1">Login</label>
+                                        <input type="text" name="username" [(ngModel)]="username"
+                                        class="form-control py-4"
+                                        placeholder="Digite seu nome de usuário"
+                                        autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="small mb-1">Senha</label>
+                                        <input type="password" name="password" [(ngModel)]="password"
+                                        class="form-control py-4"
+                                        placeholder="Digite sua senha">
+                                    </div>
+
+                                    <div class="form-group align-items-center justify-content-between mt-4 mb-0">
+                                        <button type="submit" class="btn btn-primary" *ngIf="!cadastroUsuario">
+                                            Fazer login
+                                        </button>
+
+                                        <button type="button" class="btn btn-success" 
+                                                *ngIf="cadastroUsuario"
+                                                (click)="cadastrar()">
+                                            Cadastrar
+                                        </button>                                        
+
+                                        <button type="button" 
+                                                class="btn btn-danger ml-1" *ngIf="cadastroUsuario"
+                                                (click)="cancelaCadastro()">
+                                            Cancelar
+                                        </button>                                        
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="card-footer text-center" *ngIf="!cadastroUsuario">
+                                <div class="small">
+                                    <a href="#" (click)="preparaCadastroUsuario($event)">
+                                        Precisa se cadastrar? Clique aqui
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</div>

@@ -1,0 +1,39 @@
+<h2 class="mt-4">Adicionar fotos</h2>
+<br>
+<div class="container">
+    <form #postForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Nome do álbum</label>
+                    <input type="text" class="form-control" [ngModel]="album.nome" name="nome" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="imagemCapa">Selecione uma imagem</label>
+                    <input type="file" accept="image/*" class="form-control-file" id="imagem" 
+                    (change)="handleUpload($event)" name="imagem" required>
+                </div>                          
+            </div>
+        </div>    
+        <div class="row">
+          <div class="col-md-2">
+              <button type="submit" class="btn btn-success">Adicionar Foto</button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Foto adicionada com sucesso.
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let error of errors">
+                    {{ error.field + ' ' + error.defaultMessage }}
+                </div>                
+            </div>
+        </div>        
+    </form>
+</div>

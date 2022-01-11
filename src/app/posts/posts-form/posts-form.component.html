@@ -1,0 +1,49 @@
+<h2 class="mt-4">Criar novo post</h2>
+<br>
+<div class="container">
+    <form #postForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Título</label>
+                    <input type="text" class="form-control" [(ngModel)]="post.titulo" name="titulo" 
+                    required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="imagemCapa">Selecione a imagem de capa</label>
+                    <input type="file" accept="image/*" class="form-control-file" id="imagemCapa" 
+                    (change)="handleUpload($event)" name="imagemCapa" required>
+                </div>                          
+            </div>
+        </div>    
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Conteúdo</label>
+                    <angular-editor [(ngModel)]="htmlContent" [config]="config" [(ngModel)]="post.conteudo" 
+                    name="conteudo" required></angular-editor>
+                </div>
+            </div>
+        </div>        
+        <div class="row">
+          <div class="col-md-2">
+              <button type="submit" class="btn btn-success">Publicar</button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Post salvo com sucesso.
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let error of errors">
+                    {{ error.field + ' ' + error.defaultMessage }}
+                </div>                
+            </div>
+        </div>        
+    </form>
+</div>

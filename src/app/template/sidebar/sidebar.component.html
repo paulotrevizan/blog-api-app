@@ -1,0 +1,50 @@
+<div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <div class="sb-sidenav-menu-heading">Principal</div>
+                <a class="nav-link" routerLink="/home">
+                    <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                    Home
+                </a>
+                <a class="nav-link" routerLink="/albums/all">
+                    <div class="sb-nav-link-icon"><i class="far fa-images"></i></div>
+                    Álbuns de Fotos
+                </a>
+                <div class="sb-sidenav-menu-heading" *ngIf="nomeUsuarioLogado">Postagens</div>
+                <a class="nav-link" routerLink="/posts" *ngIf="nomeUsuarioLogado">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Meus posts
+                </a>                                
+                <a class="nav-link" routerLink="/posts/form" *ngIf="nomeUsuarioLogado">
+                    <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                    Criar post
+                </a>
+                <div class="sb-sidenav-menu-heading" *ngIf="nomeUsuarioLogado">Album de Fotos</div>
+                <a class="nav-link" routerLink="/albums" *ngIf="nomeUsuarioLogado">
+                    <div class="sb-nav-link-icon"><i class="far fa-images"></i></div>
+                    Meus albums
+                </a>
+                <a class="nav-link" routerLink="/albums/form" *ngIf="nomeUsuarioLogado">
+                    <div class="sb-nav-link-icon"><i class="far fa-image"></i></div>
+                    Criar album
+                </a>                
+            </div>
+        </div>
+        <div class="sb-sidenav-footer" *ngIf="!nomeUsuarioLogado">
+            <button class="btn btn-dark" routerLink="/login">
+                Entrar
+            </button>            
+        </div>        
+        <div class="sb-sidenav-footer" *ngIf="nomeUsuarioLogado">
+            <div class="small">logado como:</div>
+            {{ nomeUsuarioLogado }}
+        </div>
+
+        <div class="sb-sidenav-footer" *ngIf="nomeUsuarioLogado">
+            <button class="btn btn-dark" (click)="sair()">
+                Sair
+            </button>
+        </div>
+    </nav>
+</div>
